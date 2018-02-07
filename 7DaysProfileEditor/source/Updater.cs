@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -51,3 +51,4 @@ namespace SevenDaysProfileEditor {
         }
     }
 }
+*/

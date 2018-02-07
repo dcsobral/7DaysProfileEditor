@@ -64,7 +64,7 @@ namespace SevenDaysProfileEditor {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Updater.DoUpdate();
+            //Updater.DoUpdate();
 
             MainWindow window = new MainWindow();
             Config.Load();
@@ -86,7 +86,7 @@ namespace SevenDaysProfileEditor {
                 return;
             }
 
-            //Ask user were is game
+            //Ask user were the game is
             OpenFileDialog gameRootDialog = new OpenFileDialog() {
                 Title = "Tool needs to find the 7DaysToDie.exe!",
                 Filter = "7DaysToDie.exe|7DaysToDie.exe",
