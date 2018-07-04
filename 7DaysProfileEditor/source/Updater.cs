@@ -14,7 +14,7 @@ namespace SevenDaysProfileEditor {
             AutoUpdater.ShowSkipButton = false;
             AutoUpdater.ReportErrors = true;
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
-            AutoUpdater.Start("http://7daysprofileeditor.azurewebsites.net/version.xml");
+            AutoUpdater.Start("https://raw.githubusercontent.com/theHoncho/7DaysProfileEditor/master/7DaysProfileEditor/version.xml");
             #endregion
         }
         private static void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args) {
