@@ -2,6 +2,7 @@
 using SevenDaysProfileEditor.Skills;
 using SevenDaysProfileEditor.StatsAndGeneral;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace SevenDaysProfileEditor.Data {
@@ -158,18 +159,25 @@ namespace SevenDaysProfileEditor.Data {
                             itemData.attachmentNames = attachmentsNode.Attributes[1].Value.Split(',');
                         }
 
-                        if (partsNode != null) {
-                            itemData.partNames = new string[4];
+                        try
+                        {
+                            if (partsNode != null) {
+                                itemData.partNames = new string[4];
 
-                            itemData.partNames[0] = GetChildNodeByName(partsNode, "Stock").Attributes[1].Value;
-                            itemData.partNames[1] = GetChildNodeByName(partsNode, "Receiver").Attributes[1].Value;
-                            itemData.partNames[2] = GetChildNodeByName(partsNode, "Pump").Attributes[1].Value;
-                            itemData.partNames[3] = GetChildNodeByName(partsNode, "Barrel").Attributes[1].Value;
+                                itemData.partNames[0] = GetChildNodeByName(partsNode, "Stock").Attributes[1].Value;
+                                itemData.partNames[1] = GetChildNodeByName(partsNode, "Receiver").Attributes[1].Value;
+                                itemData.partNames[2] = GetChildNodeByName(partsNode, "Pump").Attributes[1].Value;
+                                itemData.partNames[3] = GetChildNodeByName(partsNode, "Barrel").Attributes[1].Value;
+                            }
+
+                            if (magazineSizeNode != null) {
+                                itemData.magazineSize = int.Parse(magazineSizeNode.Attributes[1].Value);
+                                itemData.magazineItems = GetChildNodeByName(action0Node, "Magazine_items").Attributes[1].Value.Split(',');
+                            }
                         }
-
-                        if (magazineSizeNode != null) {
-                            itemData.magazineSize = int.Parse(magazineSizeNode.Attributes[1].Value);
-                            itemData.magazineItems = GetChildNodeByName(action0Node, "Magazine_items").Attributes[1].Value.Split(',');
+                        catch (System.Exception)
+                        {
+                            MessageBox.Show("Bad XML Data for item " + itemData.name, "Loading", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
                     }
 

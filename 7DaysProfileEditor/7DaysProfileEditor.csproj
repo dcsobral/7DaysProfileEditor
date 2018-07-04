@@ -105,6 +105,7 @@
     <Compile Include="source\Data\UIIconData.cs" />
     <Compile Include="source\Data\XmlData.cs" />
     <Compile Include="source\Data\XmlNullReferenceException.cs" />
+    <Compile Include="source\DirectoryCopy.cs" />
     <Compile Include="source\ErrorHandler.cs" />
     <Compile Include="source\GUI\AboutWindow.cs">
       <SubType>Form</SubType>

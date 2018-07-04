@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace SevenDaysProfileEditor.Data {
 
@@ -173,19 +174,34 @@ namespace SevenDaysProfileEditor.Data {
 
                     string[] imagePaths = Directory.GetFiles(path);
 
-                    foreach (string imagePath in imagePaths) {
+                    foreach (string imagePath in imagePaths ) {
+                        if (Path.GetExtension(imagePath).Equals(".xml"))
+                        {
+                            continue;
+                        }
+                            
                         string name = Path.GetFileNameWithoutExtension(imagePath);
 
-                        Image image = Image.FromFile(imagePath);
+                        Image image;
+                        try
+                        {
+                            image = Image.FromFile(imagePath);
+                        }
+                        catch (OutOfMemoryException)
+                        {
+                            MessageBox.Show("Invalid icon file " + imagePath, "Loading", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            continue;
+                        }
                         image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                        int bufferSize = image.Height * image.Width * 4;
 
                         MemoryStream byteStream = new MemoryStream();
                         image.Save(byteStream, ImageFormat.Bmp);
 
                         byte[] pngBytes = byteStream.ToArray();
-                        byte[] bmpBytes = new byte[ICON_BYTE_LENGTH];
+                        byte[] bmpBytes = new byte[bufferSize];
 
-                        Array.Copy(pngBytes, 54, bmpBytes, 0, ICON_BYTE_LENGTH);
+                        Array.Copy(pngBytes, 54, bmpBytes, 0, pngBytes.Length - 54);
 
                         itemIconDictionary.Add(name, bmpBytes);
                     }

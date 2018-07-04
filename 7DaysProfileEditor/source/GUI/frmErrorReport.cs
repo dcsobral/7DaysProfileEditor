@@ -73,7 +73,7 @@ namespace SevenDaysProfileEditor {
             string modspath = gameRoot + "\\Mods";
 
             if (Directory.Exists(modspath))
-                File.Copy(modspath, reportDir + "\\Mods");
+                DirectoryCopy.CopyDir(modspath, reportDir + "\\Mods", true);
 
             // Get xml's
             File.Copy(gameRoot + "\\Data\\Config\\items.xml", reportDir + "\\items.xml", true);
